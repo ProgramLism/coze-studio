@@ -41,6 +41,7 @@ import (
 	"github.com/coze-dev/coze-studio/backend/infra/contract/document/searchstore"
 	"github.com/coze-dev/coze-studio/backend/infra/contract/storage"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/cache/redis"
+	"github.com/coze-dev/coze-studio/backend/infra/impl/database"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/document/parser/builtin"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/document/rerank/rrf"
 	sses "github.com/coze-dev/coze-studio/backend/infra/impl/document/searchstore/elasticsearch"
@@ -49,7 +50,6 @@ import (
 	"github.com/coze-dev/coze-studio/backend/infra/impl/es"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/eventbus"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/idgen"
-	"github.com/coze-dev/coze-studio/backend/infra/impl/mysql"
 	rdbservice "github.com/coze-dev/coze-studio/backend/infra/impl/rdb"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/storage/minio"
 	"github.com/coze-dev/coze-studio/backend/pkg/lang/ptr"
@@ -98,7 +98,7 @@ func (suite *KnowledgeTestSuite) SetupSuite() {
 		minioSK       = os.Getenv(consts.MinIOSK)
 	)
 
-	db, err := mysql.New()
+	db, err := database.New()
 	if err != nil {
 		panic(err)
 	}

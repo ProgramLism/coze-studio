@@ -53,6 +53,7 @@ import (
 	"github.com/coze-dev/coze-studio/backend/infra/impl/cache/redis"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/coderunner/direct"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/coderunner/sandbox"
+	"github.com/coze-dev/coze-studio/backend/infra/impl/database"
 	builtinNL2SQL "github.com/coze-dev/coze-studio/backend/infra/impl/document/nl2sql/builtin"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/document/ocr/ppocr"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/document/ocr/veocr"
@@ -72,7 +73,6 @@ import (
 	"github.com/coze-dev/coze-studio/backend/infra/impl/idgen"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/imagex/veimagex"
 	builtinM2Q "github.com/coze-dev/coze-studio/backend/infra/impl/messages2query/builtin"
-	"github.com/coze-dev/coze-studio/backend/infra/impl/mysql"
 	oceanbaseClient "github.com/coze-dev/coze-studio/backend/infra/impl/oceanbase"
 	"github.com/coze-dev/coze-studio/backend/infra/impl/storage"
 	"github.com/coze-dev/coze-studio/backend/pkg/lang/conv"
@@ -110,7 +110,7 @@ func Init(ctx context.Context) (*AppDependencies, error) {
 		return nil, fmt.Errorf("init tos client failed, err=%w", err)
 	}
 
-	deps.DB, err = mysql.New()
+	deps.DB, err = database.New()
 	if err != nil {
 		return nil, fmt.Errorf("init db failed, err=%w", err)
 	}
